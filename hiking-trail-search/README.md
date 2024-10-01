@@ -40,7 +40,7 @@ As the difficulties of the trails were not consistent, a check is done to see wh
 
 -   search.html
 
-This is the HTML template that is used to display the web app. Some styling is included and more can be added in the future. The filtering display uses a <form> which allows to easily send and receive the user input. A table to display the results is only visible if there are any valid results.
+This is the HTML template that is used to display the web app. Some styling is included and more can be added in the future. The filtering display uses a form tag which allows to easily send and receive the user input. A table to display the results is only visible if there are any valid results.
 
 ## Improvements
 
