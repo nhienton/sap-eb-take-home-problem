@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #d1abbd;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        th {
+            position: sticky;
+            top: 0; 
+            z-index: 10;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d1abbd;
+            text-align: center;
+        }
+
+        .filter-group {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #d1abbd;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        select {
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 200px; 
+        }
+
+        input[type="submit"] {
+            background-color: #d1abbd;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ad8f9d;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Hiking Trails</h1>
+    <div class="filter-group">
+        <h2>Filters</h2>
+
+        <form method="GET" action="/search">
+            <label>
+                <input type="checkbox" name="restrooms" id="restrooms">
+                Restrooms
+            </label>
+            <label>
+                <input type="checkbox" name="picnics" id="picnics">
+                Picnics
+            </label>
+            <label>
+                <input type="checkbox" name="fishing" id="fishing">
+                Fishing
+            </label>
+            <label>
+                <input type="checkbox" name="fee" id="fee">
+                Fee
+            </label>
+            <label>
+                <input type="checkbox" name="bike_racks" id="bike_racks">
+                Bike Racks
+            </label>
+            <label>
+                <input type="checkbox" name="bike_trails" id="bike_trails">
+                Bike Trails
+            </label>
+            <label>
+                <input type="checkbox" name="grills" id="grills">
+                Grills
+            </label>
+
+            <label for="difficulty">Select Difficulty Level:
+                <select id="difficulty" name="difficulty">
+                    <option value="default">Not Selected</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Difficult">Difficult</option>
+                </select>
+            </label>
+
+            <label for="trash_cans">Trash Cans:
+                <select id="trash_cans" name="trash_cans">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3+">3+</option>
+                </select>
+            </label>
+
+            <label>
+                <input type="checkbox" name="recycle_bins" id="recycle_bins">
+                Recycle Bins
+            </label>
+            <label>
+                <input type="checkbox" name="dog_compost" id="dog_compost">
+                Dog Compost
+            </label>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <table>
+        <tbody>
+            {{if .}}<thead>
+                <tr>
+                    <th>Hiking Trail</th>
+                    <th>Restrooms</th>
+                    <th>Picnic</th>
+                    <th>Fishing</th>
+                    <th>Address</th>
+                    <th>Fee</th>
+                    <th>Bike Racks</th>
+                    <th>Bike Trails</th>
+                    <th>Grills</th>
+                    <th>Trash Cans</th>
+                    <th>Difficulty</th>
+                    <th>Recycle Bins</th>
+                    <th>Dog Compost</th>
+                </tr>
+            </thead>
+            {{end}}
+    
+            {{range .}}        
+            
+            <tr>
+                <td>{{.AccessName}}</td>
+                <td>{{if .Restrooms}}Yes{{else}}No{{end}}</td>
+                <td>{{if .Picnics}}Yes{{else}}No{{end}}</td>
+                <td>{{if .Fishing}}Yes{{else}}No{{end}}</td>
+                <td>{{.Address}}</td>
+                <td>{{if .Fee}}Yes{{else}}No{{end}}</td>
+                <td>{{if .BikeRacks}}Yes{{else}}No{{end}}</td>
+                <td>{{if .BikeTrails}}Yes{{else}}No{{end}}</td>
+                <td>{{if .Grills}}Yes{{else}}No{{end}}</td>
+                <td>{{.TrashCans}}</td>
+                <td>{{.Difficulty}}</td>
+                <td>{{if .RecycleBins}}Yes{{else}}No{{end}}</td>
+                <td>{{if .DogCompost}}Yes{{else}}No{{end}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+</body>
+</html>
